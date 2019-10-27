@@ -6,10 +6,14 @@
 
   <ItemGroup>
     <None Remove="Files\TextFile.txt" />
+    <None Remove="Files\XMLFile.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Files\TextFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\XMLFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
