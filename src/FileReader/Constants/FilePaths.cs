@@ -6,6 +6,8 @@
 
         public const string XmlFilePath = "Files/XMLFile.xml";
 
+        public const string JsonFilePath = "Files/JsonFile.json";
+
         public const string EncryptedTextFilePath = "Files/EncryptedTextFile.txt";
 
         public const string EncryptedXmlFilePath = "Files/EncryptedXMLFile.xml";

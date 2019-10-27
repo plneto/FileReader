@@ -43,6 +43,12 @@ namespace FileReader.Files
                 FileTypes.Xml,
                 true,
                 false);
+
+            yield return new File(
+                FilePaths.JsonFilePath,
+                FileTypes.Json,
+                false,
+                false);
         }
     }
 }

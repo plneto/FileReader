@@ -21,7 +21,7 @@ namespace FileReader.Tests.FileReaders
         }
 
         [Fact]
-        public void ReadXmlFile_GetTextFileContents_Success()
+        public void ReadXmlFile_GetFileContents_Success()
         {
             // Arrange & Act
             var result = _target.ReadFile();
@@ -57,7 +57,7 @@ namespace FileReader.Tests.FileReaders
         }
 
         [Fact]
-        public void ReadEncryptedXmlFile_GetXmlFileContentsDecrypted_Success()
+        public void ReadEncryptedXmlFile_GetFileContentsDecrypted_Success()
         {
             // Arrange & Act
             var result = _target.ReadEncryptedFile();

@@ -3,6 +3,7 @@
     public enum FileTypes
     {
         Text,
-        Xml
+        Xml,
+        Json
     }
 }

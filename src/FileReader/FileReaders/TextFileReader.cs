@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using FileReader.Builders;
 using FileReader.Interfaces;
 using FileReader.Models;
@@ -25,7 +26,7 @@ namespace FileReader.FileReaders
 
             if (textFile == null)
             {
-                throw new NotSupportedException();
+                throw new FileNotFoundException();
             }
 
             using (var file = File.OpenText(textFile.FilePath))
@@ -43,7 +44,7 @@ namespace FileReader.FileReaders
 
             if (textFile == null)
             {
-                throw new NotSupportedException();
+                throw new FileNotFoundException();
             }
 
             if (!_fileSecurity.CanAccessFile(role))
@@ -67,7 +68,7 @@ namespace FileReader.FileReaders
 
             if (textFile == null)
             {
-                throw new NotSupportedException();
+                throw new FileNotFoundException();
             }
 
             using (var file = File.OpenText(textFile.FilePath))
