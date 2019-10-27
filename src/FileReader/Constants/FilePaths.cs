@@ -17,5 +17,7 @@
         public const string ProtectedTextFilePath = "Files/ProtectedTextFile.txt";
 
         public const string ProtectedXmlFilePath = "Files/ProtectedXMLFile.xml";
+
+        public const string ProtectedJsonFilePath = "Files/ProtectedJsonFile.json";
     }
 }

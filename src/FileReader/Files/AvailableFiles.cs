@@ -55,6 +55,12 @@ namespace FileReader.Files
                 FileTypes.Json,
                 false,
                 true);
+
+            yield return new File(
+                FilePaths.ProtectedJsonFilePath,
+                FileTypes.Json,
+                true,
+                false);
         }
     }
 }
