@@ -1,4 +1,5 @@
-﻿using FileReader.EncryptionAlgorithms;
+﻿using System;
+using FileReader.EncryptionAlgorithms;
 using FileReader.FileReaders;
 using FileReader.Interfaces;
 using FileReader.Security;
@@ -37,6 +38,32 @@ namespace FileReader.Tests.FileReaders
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
+        }
+
+        [Fact]
+        public void ReadProtectedJsonFile_AdminRole_ReturnsFileContents()
+        {
+            // Arrange
+            const string role = "admin";
+
+            // Act
+            var result = _target.ReadProtectedFile(role);
+
+            // Assert
+            result.Should().NotBeNullOrWhiteSpace();
+        }
+
+        [Fact]
+        public void ReadProtectedJsonFile_UserRole_ThrowsUnauthorizedAccessException()
+        {
+            // Arrange
+            const string role = "user";
+
+            // Act
+            Action action = () => _target.ReadProtectedFile(role);
+
+            // Assert
+            action.Should().Throw<UnauthorizedAccessException>();
         }
     }
 }

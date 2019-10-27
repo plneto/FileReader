@@ -37,7 +37,26 @@ namespace FileReader.FileReaders
 
         public string ReadProtectedFile(string role)
         {
-            throw new NotImplementedException();
+            var jsonFile = FileBuilder
+                .Create(FileTypes.Json)
+                .WithAuthorization()
+                .Build();
+
+            if (jsonFile == null)
+            {
+                throw new FileNotFoundException();
+            }
+
+            if (!_fileSecurity.CanAccessFile(role))
+            {
+                throw new UnauthorizedAccessException(
+                    $"The role {role} is unauthorized to access this file.");
+            }
+
+            using (var file = File.OpenText(jsonFile.FilePath))
+            {
+                return file.ReadToEnd();
+            }
         }
 
         public string ReadEncryptedFile()
