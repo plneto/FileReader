@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using FileReader.Builders;
 using FileReader.Interfaces;
 using FileReader.Models;
@@ -9,13 +8,13 @@ namespace FileReader.FileReaders
 {
     public class JsonFileReader : IFileReader
     {
-        private readonly IFileSecurity _fileSecurity;
         private readonly IFileEncryption _fileEncryption;
+        private readonly IFileSecurity _fileSecurity;
 
-        public JsonFileReader(IFileSecurity fileSecurity, IFileEncryption fileEncryption)
+        public JsonFileReader(IFileEncryption fileEncryption, IFileSecurity fileSecurity)
         {
-            _fileSecurity = fileSecurity;
             _fileEncryption = fileEncryption;
+            _fileSecurity = fileSecurity;
         }
 
         public string ReadFile()
@@ -49,8 +48,7 @@ namespace FileReader.FileReaders
 
             if (!_fileSecurity.CanAccessFile(role))
             {
-                throw new UnauthorizedAccessException(
-                    $"The role {role} is unauthorized to access this file.");
+                return $"ACCESS DENIED: The role \"{role}\" is not authorized to access this file.";
             }
 
             using (var file = File.OpenText(jsonFile.FilePath))

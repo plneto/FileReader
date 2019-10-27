@@ -1,5 +1,4 @@
-﻿using System;
-using FileReader.EncryptionAlgorithms;
+﻿using FileReader.EncryptionAlgorithms;
 using FileReader.FileReaders;
 using FileReader.Interfaces;
 using FileReader.Security;
@@ -17,7 +16,7 @@ namespace FileReader.Tests.FileReaders
             var fileSecurity = new RoleBasedSecurity();
             var encryption = new ReverseTextEncryption();
 
-            _target = new JsonFileReader(fileSecurity, encryption);
+            _target = new JsonFileReader(encryption, fileSecurity);
         }
 
         [Fact]
@@ -60,10 +59,10 @@ namespace FileReader.Tests.FileReaders
             const string role = "user";
 
             // Act
-            Action action = () => _target.ReadProtectedFile(role);
+            var result = _target.ReadProtectedFile(role);
 
             // Assert
-            action.Should().Throw<UnauthorizedAccessException>();
+            result.Should().Contain("ACCESS DENIED");
         }
     }
 }

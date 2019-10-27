@@ -1,4 +1,3 @@
-using System;
 using FileReader.EncryptionAlgorithms;
 using FileReader.FileReaders;
 using FileReader.Interfaces;
@@ -54,16 +53,16 @@ namespace FileReader.Tests.FileReaders
         }
 
         [Fact]
-        public void ReadProtectedTextFile_UserRole_ThrowsUnauthorizedAccessException()
+        public void ReadProtectedTextFile_UserRole_AccessDenied()
         {
             // Arrange
             const string role = "user";
 
             // Act
-            Action action = () => _target.ReadProtectedFile(role);
+            var result = _target.ReadProtectedFile(role);
 
             // Assert
-            action.Should().Throw<UnauthorizedAccessException>();
+            result.Should().Contain("ACCESS DENIED");
         }
     }
 }
