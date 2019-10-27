@@ -4,16 +4,16 @@ using FileReader.Models;
 
 namespace FileReader
 {
-    public class TextFileReader : ITextFileReader
+    public class XmlFileReader : IXmlFileReader
     {
         private readonly IFile _file;
 
-        public TextFileReader()
+        public XmlFileReader()
         {
-            _file = new TextFile();
+            _file = new XmlFile();
         }
 
-        public string ReadTextFile()
+        public string ReadXmlFile()
         {
             using (var file = File.OpenText(_file.FilePath))
             {
