@@ -8,14 +8,18 @@ namespace FileReader.FileReaders
     public class XmlFileReader : IXmlFileReader
     {
         private readonly IFileSecurity _fileSecurity;
+        private readonly IFileEncryption _fileEncryption;
         private readonly IFile _xmlFile;
         private readonly IFile _protectedXmlFile;
+        private readonly IFile _encryptedXmlFile;
 
-        public XmlFileReader(IFileSecurity fileSecurity)
+        public XmlFileReader(IFileSecurity fileSecurity, IFileEncryption fileEncryption)
         {
             _fileSecurity = fileSecurity;
+            _fileEncryption = fileEncryption;
             _xmlFile = new XmlFile();
             _protectedXmlFile = new ProtectedXmlFile();
+            _encryptedXmlFile = new EncryptedXmlFile();
         }
 
         public string ReadXmlFile()
@@ -37,6 +41,16 @@ namespace FileReader.FileReaders
             using (var file = File.OpenText(_protectedXmlFile.FilePath))
             {
                 return file.ReadToEnd();
+            }
+        }
+
+        public string ReadEncryptedXmlFile()
+        {
+            using (var file = File.OpenText(_encryptedXmlFile.FilePath))
+            {
+                var encryptedContents = file.ReadToEnd();
+
+                return _fileEncryption.DecryptFileContents(encryptedContents);
             }
         }
     }

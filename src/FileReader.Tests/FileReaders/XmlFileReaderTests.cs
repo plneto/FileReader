@@ -1,4 +1,5 @@
 using System;
+using FileReader.EncryptionAlgorithms;
 using FileReader.FileReaders;
 using FileReader.Interfaces;
 using FileReader.Security;
@@ -14,8 +15,9 @@ namespace FileReader.Tests.FileReaders
         public XmlFileReaderTests()
         {
             var fileSecurity = new RoleBasedSecurity();
+            var encryption = new ReverseTextEncryption();
 
-            _target = new XmlFileReader(fileSecurity);
+            _target = new XmlFileReader(fileSecurity, encryption);
         }
 
         [Fact]
@@ -52,6 +54,16 @@ namespace FileReader.Tests.FileReaders
 
             // Assert
             action.Should().Throw<UnauthorizedAccessException>();
+        }
+
+        [Fact]
+        public void ReadEncryptedXmlFile_GetXmlFileContentsDecrypted_Success()
+        {
+            // Arrange & Act
+            var result = _target.ReadEncryptedXmlFile();
+
+            // Assert
+            result.Should().NotBeNullOrWhiteSpace();
         }
     }
 }

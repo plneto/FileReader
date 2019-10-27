@@ -5,5 +5,7 @@
         string ReadXmlFile();
 
         string ReadProtectedXmlFile(string role);
+
+        string ReadEncryptedXmlFile();
     }
 }
