@@ -4,6 +4,8 @@
     {
         string ReadTextFile();
 
+        string ReadProtectedTextFile(string role);
+
         string ReadEncryptedTextFile();
     }
 }
