@@ -5,7 +5,7 @@ using FileReader.Models;
 
 namespace FileReader.FileReaders
 {
-    public class XmlFileReader : IXmlFileReader
+    public class XmlFileReader : IFileReader
     {
         private readonly IFileSecurity _fileSecurity;
         private readonly IFileEncryption _fileEncryption;
@@ -22,7 +22,7 @@ namespace FileReader.FileReaders
             _encryptedXmlFile = new EncryptedXmlFile();
         }
 
-        public string ReadXmlFile()
+        public string ReadFile()
         {
             using (var file = File.OpenText(_xmlFile.FilePath))
             {
@@ -30,7 +30,7 @@ namespace FileReader.FileReaders
             }
         }
 
-        public string ReadProtectedXmlFile(string role)
+        public string ReadProtectedFile(string role)
         {
             if (!_fileSecurity.CanAccessFile(role))
             {
@@ -44,7 +44,7 @@ namespace FileReader.FileReaders
             }
         }
 
-        public string ReadEncryptedXmlFile()
+        public string ReadEncryptedFile()
         {
             using (var file = File.OpenText(_encryptedXmlFile.FilePath))
             {

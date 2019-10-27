@@ -10,7 +10,7 @@ namespace FileReader.Tests.FileReaders
 {
     public class TextFileReaderTests
     {
-        private readonly ITextFileReader _target;
+        private readonly IFileReader _target;
 
         public TextFileReaderTests()
         {
@@ -24,7 +24,7 @@ namespace FileReader.Tests.FileReaders
         public void ReadTextFile_GetTextFileContents_Success()
         {
             // Arrange & Act
-            var result = _target.ReadTextFile();
+            var result = _target.ReadFile();
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
@@ -34,7 +34,7 @@ namespace FileReader.Tests.FileReaders
         public void ReadEncryptedTextFile_GetTextFileContentsDecrypted_Success()
         {
             // Arrange & Act
-            var result = _target.ReadEncryptedTextFile();
+            var result = _target.ReadEncryptedFile();
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
@@ -47,7 +47,7 @@ namespace FileReader.Tests.FileReaders
             const string role = "admin";
 
             // Act
-            var result = _target.ReadProtectedTextFile(role);
+            var result = _target.ReadProtectedFile(role);
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
@@ -60,7 +60,7 @@ namespace FileReader.Tests.FileReaders
             const string role = "user";
 
             // Act
-            Action action = () => _target.ReadProtectedTextFile(role);
+            Action action = () => _target.ReadProtectedFile(role);
 
             // Assert
             action.Should().Throw<UnauthorizedAccessException>();

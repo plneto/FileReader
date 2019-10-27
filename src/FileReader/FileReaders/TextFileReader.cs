@@ -5,7 +5,7 @@ using FileReader.Models;
 
 namespace FileReader.FileReaders
 {
-    public class TextFileReader : ITextFileReader
+    public class TextFileReader : IFileReader
     {
         private readonly IFileEncryption _fileEncryption;
         private readonly IFileSecurity _fileSecurity;
@@ -22,7 +22,7 @@ namespace FileReader.FileReaders
             _protectedTextFile = new ProtectedTextFile();
         }
 
-        public string ReadTextFile()
+        public string ReadFile()
         {
             using (var file = File.OpenText(_textFile.FilePath))
             {
@@ -30,7 +30,7 @@ namespace FileReader.FileReaders
             }
         }
 
-        public string ReadProtectedTextFile(string role)
+        public string ReadProtectedFile(string role)
         {
             if (!_fileSecurity.CanAccessFile(role))
             {
@@ -44,7 +44,7 @@ namespace FileReader.FileReaders
             }
         }
 
-        public string ReadEncryptedTextFile()
+        public string ReadEncryptedFile()
         {
             using (var file = File.OpenText(_encryptedTextFile.FilePath))
             {
