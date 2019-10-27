@@ -12,6 +12,8 @@
 
         public const string EncryptedXmlFilePath = "Files/EncryptedXMLFile.xml";
 
+        public const string EncryptedJsonFilePath = "Files/EncryptedJsonFile.json";
+
         public const string ProtectedTextFilePath = "Files/ProtectedTextFile.txt";
 
         public const string ProtectedXmlFilePath = "Files/ProtectedXMLFile.xml";

@@ -49,6 +49,12 @@ namespace FileReader.Files
                 FileTypes.Json,
                 false,
                 false);
+
+            yield return new File(
+                FilePaths.EncryptedJsonFilePath,
+                FileTypes.Json,
+                false,
+                true);
         }
     }
 }

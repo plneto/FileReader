@@ -42,7 +42,22 @@ namespace FileReader.FileReaders
 
         public string ReadEncryptedFile()
         {
-            throw new NotImplementedException();
+            var jsonFile = FileBuilder
+                .Create(FileTypes.Json)
+                .WithEncryption()
+                .Build();
+
+            if (jsonFile == null)
+            {
+                throw new FileNotFoundException();
+            }
+
+            using (var file = File.OpenText(jsonFile.FilePath))
+            {
+                var encryptedContents = file.ReadToEnd();
+
+                return _fileEncryption.DecryptFileContents(encryptedContents);
+            }
         }
     }
 }

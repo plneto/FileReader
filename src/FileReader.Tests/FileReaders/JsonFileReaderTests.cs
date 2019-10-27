@@ -28,5 +28,15 @@ namespace FileReader.Tests.FileReaders
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
         }
+
+        [Fact]
+        public void ReadEncryptedJsonFile_GetFileContentsDecrypted_Success()
+        {
+            // Arrange & Act
+            var result = _target.ReadEncryptedFile();
+
+            // Assert
+            result.Should().NotBeNullOrWhiteSpace();
+        }
     }
 }

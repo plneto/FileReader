@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Files\EncryptedJsonFile.json" />
     <None Remove="Files\EncryptedTextFile.txt" />
     <None Remove="Files\EncryptedXMLFile.xml" />
     <None Remove="Files\JsonFile.json" />
@@ -15,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Files\EncryptedJsonFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\EncryptedTextFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
