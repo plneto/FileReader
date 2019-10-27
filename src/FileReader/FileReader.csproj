@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Files\EncryptedTextFile.txt" />
     <None Remove="Files\TextFile.txt" />
     <None Remove="Files\XMLFile.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Files\EncryptedTextFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\TextFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

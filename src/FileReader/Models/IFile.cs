@@ -1,6 +1,6 @@
 ﻿namespace FileReader.Models
 {
-    public interface IFile
+    internal interface IFile
     {
         string FilePath { get; }
     }
