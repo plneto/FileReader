@@ -6,7 +6,7 @@ before_build:
     - dotnet restore ".\src\FileReader.sln"
 
 build_script:
-	- dotnet build ".\src\FileReader.sln"
+    - dotnet build ".\src\FileReader.sln"
 
 test_script:
-	- dotnet test ".\src\FileReader.sln"
+    - dotnet test ".\src\FileReader.sln"
