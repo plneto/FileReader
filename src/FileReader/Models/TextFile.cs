@@ -2,7 +2,7 @@
 
 namespace FileReader.Models
 {
-    public class TextFile : IFile
+    internal class TextFile : IFile
     {
         public TextFile()
         {

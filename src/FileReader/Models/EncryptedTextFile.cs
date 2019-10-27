@@ -2,11 +2,11 @@
 
 namespace FileReader.Models
 {
-    internal class XmlFile : IFile
+    internal class EncryptedTextFile : IFile
     {
-        public XmlFile()
+        public EncryptedTextFile()
         {
-            FilePath = FilePaths.XmlFilePath;
+            FilePath = FilePaths.EncryptedTextFilePath;
         }
 
         public string FilePath { get; }

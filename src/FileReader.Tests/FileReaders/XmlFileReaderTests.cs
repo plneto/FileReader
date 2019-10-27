@@ -1,23 +1,24 @@
+using FileReader.FileReaders;
 using FileReader.Interfaces;
 using FluentAssertions;
 using Xunit;
 
-namespace FileReader.Tests
+namespace FileReader.Tests.FileReaders
 {
-    public class TextFileReaderTests
+    public class XmlFileReaderTests
     {
-        private readonly ITextFileReader _target;
+        private readonly IXmlFileReader _target;
 
-        public TextFileReaderTests()
+        public XmlFileReaderTests()
         {
-            _target = new TextFileReader();
+            _target = new XmlFileReader();
         }
 
         [Fact]
         public void ReadTextFile_GetTextFileContents_Success()
         {
             // Arrange & Act
-            var result = _target.ReadTextFile();
+            var result = _target.ReadXmlFile();
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();

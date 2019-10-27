@@ -3,5 +3,7 @@
     public interface ITextFileReader
     {
         string ReadTextFile();
+
+        string ReadEncryptedTextFile();
     }
 }
