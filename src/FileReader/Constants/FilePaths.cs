@@ -7,5 +7,7 @@
         public const string XmlFilePath = "Files/XMLFile.xml";
 
         public const string EncryptedTextFilePath = "Files/EncryptedTextFile.txt";
+
+        public const string ProtectedXmlFilePath = "Files/ProtectedXMLFile.xml";
     }
 }
