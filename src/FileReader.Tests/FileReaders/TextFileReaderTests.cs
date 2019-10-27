@@ -1,6 +1,8 @@
+using System;
 using FileReader.EncryptionAlgorithms;
 using FileReader.FileReaders;
 using FileReader.Interfaces;
+using FileReader.Security;
 using FluentAssertions;
 using Xunit;
 
@@ -13,8 +15,9 @@ namespace FileReader.Tests.FileReaders
         public TextFileReaderTests()
         {
             var encryptionAlgorithm = new ReverseTextEncryption();
+            var roleBasedSecurity = new RoleBasedSecurity();
 
-            _target = new TextFileReader(encryptionAlgorithm);
+            _target = new TextFileReader(encryptionAlgorithm, roleBasedSecurity);
         }
 
         [Fact]
@@ -35,6 +38,32 @@ namespace FileReader.Tests.FileReaders
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
+        }
+
+        [Fact]
+        public void ReadProtectedTextFile_AdminRole_ReturnsFileContents()
+        {
+            // Arrange
+            const string role = "admin";
+
+            // Act
+            var result = _target.ReadProtectedTextFile(role);
+
+            // Assert
+            result.Should().NotBeNullOrWhiteSpace();
+        }
+
+        [Fact]
+        public void ReadProtectedTextFile_UserRole_ThrowsUnauthorizedAccessException()
+        {
+            // Arrange
+            const string role = "user";
+
+            // Act
+            Action action = () => _target.ReadProtectedTextFile(role);
+
+            // Assert
+            action.Should().Throw<UnauthorizedAccessException>();
         }
     }
 }
