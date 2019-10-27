@@ -3,5 +3,7 @@
     public interface IXmlFileReader
     {
         string ReadXmlFile();
+
+        string ReadProtectedXmlFile(string role);
     }
 }
