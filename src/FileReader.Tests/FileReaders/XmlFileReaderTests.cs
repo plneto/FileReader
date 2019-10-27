@@ -10,7 +10,7 @@ namespace FileReader.Tests.FileReaders
 {
     public class XmlFileReaderTests
     {
-        private readonly IXmlFileReader _target;
+        private readonly IFileReader _target;
 
         public XmlFileReaderTests()
         {
@@ -21,10 +21,10 @@ namespace FileReader.Tests.FileReaders
         }
 
         [Fact]
-        public void ReadXmlFile_GetTextFileContents_Success()
+        public void ReadXmlFile_GetFileContents_Success()
         {
             // Arrange & Act
-            var result = _target.ReadXmlFile();
+            var result = _target.ReadFile();
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
@@ -37,7 +37,7 @@ namespace FileReader.Tests.FileReaders
             const string role = "admin";
 
             // Act
-            var result = _target.ReadProtectedXmlFile(role);
+            var result = _target.ReadProtectedFile(role);
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();
@@ -50,17 +50,17 @@ namespace FileReader.Tests.FileReaders
             const string role = "user";
 
             // Act
-            Action action = () => _target.ReadProtectedXmlFile(role);
+            Action action = () => _target.ReadProtectedFile(role);
 
             // Assert
             action.Should().Throw<UnauthorizedAccessException>();
         }
 
         [Fact]
-        public void ReadEncryptedXmlFile_GetXmlFileContentsDecrypted_Success()
+        public void ReadEncryptedXmlFile_GetFileContentsDecrypted_Success()
         {
             // Arrange & Act
-            var result = _target.ReadEncryptedXmlFile();
+            var result = _target.ReadEncryptedFile();
 
             // Assert
             result.Should().NotBeNullOrWhiteSpace();

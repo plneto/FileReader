@@ -1,52 +1,77 @@
 ﻿using System;
 using System.IO;
+using FileReader.Builders;
 using FileReader.Interfaces;
 using FileReader.Models;
+using File = System.IO.File;
 
 namespace FileReader.FileReaders
 {
-    public class TextFileReader : ITextFileReader
+    public class TextFileReader : IFileReader
     {
         private readonly IFileEncryption _fileEncryption;
         private readonly IFileSecurity _fileSecurity;
-        private readonly IFile _textFile;
-        private readonly IFile _encryptedTextFile;
-        private readonly IFile _protectedTextFile;
 
         public TextFileReader(IFileEncryption fileEncryption, IFileSecurity fileSecurity)
         {
             _fileEncryption = fileEncryption;
             _fileSecurity = fileSecurity;
-            _textFile = new TextFile();
-            _encryptedTextFile = new EncryptedTextFile();
-            _protectedTextFile = new ProtectedTextFile();
         }
 
-        public string ReadTextFile()
+        public string ReadFile()
         {
-            using (var file = File.OpenText(_textFile.FilePath))
+            var textFile = FileBuilder
+                .Create(FileTypes.Text)
+                .Build();
+
+            if (textFile == null)
+            {
+                throw new FileNotFoundException();
+            }
+
+            using (var file = File.OpenText(textFile.FilePath))
             {
                 return file.ReadToEnd();
             }
         }
 
-        public string ReadProtectedTextFile(string role)
+        public string ReadProtectedFile(string role)
         {
+            var textFile = FileBuilder
+                .Create(FileTypes.Text)
+                .WithAuthorization()
+                .Build();
+
+            if (textFile == null)
+            {
+                throw new FileNotFoundException();
+            }
+
             if (!_fileSecurity.CanAccessFile(role))
             {
                 throw new UnauthorizedAccessException(
                     $"The role {role} is unauthorized to access this file.");
             }
 
-            using (var file = File.OpenText(_protectedTextFile.FilePath))
+            using (var file = File.OpenText(textFile.FilePath))
             {
                 return file.ReadToEnd();
             }
         }
 
-        public string ReadEncryptedTextFile()
+        public string ReadEncryptedFile()
         {
-            using (var file = File.OpenText(_encryptedTextFile.FilePath))
+            var textFile = FileBuilder
+                .Create(FileTypes.Text)
+                .WithEncryption()
+                .Build();
+
+            if (textFile == null)
+            {
+                throw new FileNotFoundException();
+            }
+
+            using (var file = File.OpenText(textFile.FilePath))
             {
                 var encryptedContents = file.ReadToEnd();
 
